@@ -18,6 +18,20 @@ export const openApiDocument = {
     { name: "Invoices" }
   ],
   components: {
+    parameters: {
+      transactionIdParam: {
+        name: "transactionId",
+        in: "path",
+        required: true,
+        schema: { type: "string" }
+      },
+      cardIdParam: {
+        name: "cardId",
+        in: "path",
+        required: true,
+        schema: { type: "string" }
+      }
+    },
     schemas: {
       ErrorResponse: {
         type: "object",
@@ -221,12 +235,7 @@ export const openApiDocument = {
         tags: ["Transactions"],
         summary: "Cancelar transacao",
         parameters: [
-          {
-            name: "transactionId",
-            in: "path",
-            required: true,
-            schema: { type: "string" }
-          }
+          { $ref: "#/components/parameters/transactionIdParam" }
         ],
         responses: {
           "200": {
@@ -245,12 +254,7 @@ export const openApiDocument = {
         tags: ["Transactions"],
         summary: "Simular chargeback",
         parameters: [
-          {
-            name: "transactionId",
-            in: "path",
-            required: true,
-            schema: { type: "string" }
-          }
+          { $ref: "#/components/parameters/transactionIdParam" }
         ],
         responses: {
           "200": {
@@ -269,12 +273,7 @@ export const openApiDocument = {
         tags: ["Invoices"],
         summary: "Gerar ou consultar fatura mensal",
         parameters: [
-          {
-            name: "cardId",
-            in: "path",
-            required: true,
-            schema: { type: "string" }
-          },
+          { $ref: "#/components/parameters/cardIdParam" },
           {
             name: "referenceMonth",
             in: "query",
