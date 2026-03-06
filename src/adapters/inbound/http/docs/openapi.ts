@@ -56,7 +56,7 @@ export const openApiDocument = {
         type: "object",
         properties: {
           userId: { type: "string", example: "user-id" },
-          cardNumber: { type: "string", pattern: "^\\d{16}$", example: "1234123412341234" },
+          cardNumber: { type: "string", pattern: String.raw`^\d{16}$`, example: "1234123412341234" },
           limitCents: { type: "integer", minimum: 100, example: 500000 }
         },
         required: ["userId", "cardNumber", "limitCents"]
@@ -136,9 +136,7 @@ export const openApiDocument = {
           required: true,
           content: {
             "application/json": {
-              schema: {
-                $ref: "#/components/schemas/CreateUserRequest"
-              }
+              schema: { $ref: "#/components/schemas/CreateUserRequest" }
             }
           }
         },
@@ -170,9 +168,7 @@ export const openApiDocument = {
           required: true,
           content: {
             "application/json": {
-              schema: {
-                $ref: "#/components/schemas/CreateCardRequest"
-              }
+              schema: { $ref: "#/components/schemas/CreateCardRequest" }
             }
           }
         },
@@ -204,9 +200,7 @@ export const openApiDocument = {
           required: true,
           content: {
             "application/json": {
-              schema: {
-                $ref: "#/components/schemas/ProcessTransactionRequest"
-              }
+              schema: { $ref: "#/components/schemas/ProcessTransactionRequest" }
             }
           }
         },
