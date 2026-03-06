@@ -1,5 +1,8 @@
 import { ValidationError } from "../../shared/errors/ValidationError";
 
+const MAX_EMAIL_LENGTH = 254; // RFC 5321 hard limit
+const emailRegex = /^[^\s@]+@[^\s@]{1,253}\.[^\s@]{2,63}$/;
+
 export class Email {
   private readonly value: string;
 
@@ -9,7 +12,10 @@ export class Email {
 
   public static create(email: string): Email {
     const normalized = email.trim().toLowerCase();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (normalized.length > MAX_EMAIL_LENGTH) {
+      throw new ValidationError("Invalid email format");
+    }
 
     if (!emailRegex.test(normalized)) {
       throw new ValidationError("Invalid email format");
